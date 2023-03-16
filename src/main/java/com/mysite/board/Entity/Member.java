@@ -4,6 +4,8 @@ import com.mysite.board.role.MemberRole;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -29,11 +31,17 @@ public class Member {
 	
 	private String password;
 
+	@Enumerated(EnumType.STRING)
 	private MemberRole role;
 	
 	private String birthday;
 	
 	private String addr;
 	
+	public boolean isAdmin() {
+		return MemberRole.ADMIN.equals(this.role);
+	}
+	
+
 
 }
