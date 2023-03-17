@@ -1,8 +1,9 @@
 package com.mysite.board.role;
 
 import lombok.Getter;
+import lombok.Setter;
 
-@Getter
+@Getter 
 public enum MemberRole {
 	
 	ADMIN("ROLE_ADMIN"),

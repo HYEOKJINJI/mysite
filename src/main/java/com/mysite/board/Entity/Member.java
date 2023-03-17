@@ -16,32 +16,37 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Member {
-	
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long idx;
-	
-	@Column(unique=true)
-	private String username;
-		
-	
-	private String name;
-	
-	private Integer phonenum;
-	
-	private String password;
+    
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private Long idx;
+    
+    @Column(unique=true)
+    private String username;
+        
+    private String name;
+    
+    private Integer phonenum;
+    
+    private String password;
 
-	@Enumerated(EnumType.STRING)
-	private MemberRole role;
-	
-	private String birthday;
-	
-	private String addr;
-	
-	public boolean isAdmin() {
-		return MemberRole.ADMIN.equals(this.role);
-	}
-	
+    @Enumerated(EnumType.STRING)
+    private MemberRole role;
+    
+    private String birthday;
+    
+    private String addr;
+    
+    public boolean isAdmin() {
+        return MemberRole.ADMIN.equals(this.role);
+    }
 
+    public MemberRole getRole() {
+        return role;
+    }
+
+    public void setRole(MemberRole role) {
+        this.role = role;
+    }
 
 }

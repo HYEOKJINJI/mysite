@@ -31,7 +31,9 @@ public class MemberController {
 	
 	@PostMapping("/member/create")
 	public String createMember(@Valid MemberForm memberForm, BindingResult bindingResult) {
+		
 		String birthday = memberForm.birthday1+memberForm.birthday2+memberForm.birthday3;
+		
 		if(bindingResult.hasErrors()) {
 			return "signup";
 		}

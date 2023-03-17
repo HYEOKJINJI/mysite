@@ -16,9 +16,9 @@ import jakarta.persistence.OneToMany;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
-@Setter
-@Entity
+
+
+@Entity @Getter @Setter
 public class Question {
 	
 	@Id
@@ -35,7 +35,7 @@ public class Question {
 	
 	private LocalDateTime modifyDate;
 
-	private Boolean secret;
+	private String secret;
 	
 	@OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE)
 	private List<Answer> answerList;

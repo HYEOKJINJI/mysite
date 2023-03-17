@@ -100,10 +100,18 @@
         <!-- 테이블의 내용을 출력 블락 -->
         <!-- Thymeleaf(타임리프)를 사용해서 루프 돌려서 출력 -->
 <tr class="text-center" th:each="question, loop : ${paging}">
-    <td th:text="${paging.getTotalElements-(paging.number*paging.size)-loop.index}">번호</td>
+    <td th:text="${paging.getTotalElements() - (paging.getNumber() * paging.getSize()) - loop.index}">번호</td>
     <td class="text-start">
-        <a th:if="${question.author == null or question.author.username == #authentication.name or #authentication.getAuthorities().contains('ROLE_ADMIN')}" th:href="@{|/question/read/${question.id}|}" th:text="${question.subject}">제목</a>
-        <span th:if="${question.author != null and question.author.username != #authentication.name and not #authentication.getAuthorities().contains('ROLE_ADMIN')}" th:text="${question.subject}">제목</span>
+        <span th:if="${question.secret == 'Y' 
+        			or question.author == null 
+        			or question.author.username == #authentication.name 
+        			or #authorization.expression('hasAuthority(''ROLE_ADMIN'')')}"
+            ><a th:href="@{|/question/read/${question.id}|}" th:text="${question.subject}">제목</a></span>
+        <span th:if="${question.secret == 'N' 
+        			and question.author != null 
+        			and question.author.username != #authentication.name 
+        			and not #authorization.expression('hasAuthority(''ROLE_ADMIN'')')}"
+            th:text="비밀글">제목</span>
         <span class="text-danger small ms-2" th:if="${#lists.size(question.answerList)>0}" th:text="${#lists.size(question.answerList)}"></span>
     </td>
     <td><span th:if="${question.author != null}" th:text="${question.author.username}"></span></td>

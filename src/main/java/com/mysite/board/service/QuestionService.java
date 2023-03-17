@@ -70,14 +70,14 @@ public class QuestionService {
 		 }
 	}
 	
-	public void create(String subject, String content, Member member) {
+	public void create(String subject, String content, Member member, String secret) {
 		// Question 객체를 생성후 Setter 주입
 		Question q = new Question();
 		q.setSubject(subject);
 		q.setContent(content);
 		q.setCreateDate(LocalDateTime.now());
 		q.setAuthor(member);
-		
+		q.setSecret(secret);
 		//Repository 의 save() 메소드에 q 저장
 		this.questionrepository.save(q);
 	}
